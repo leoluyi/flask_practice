@@ -67,5 +67,10 @@ def buy_drink():
     return '<p>Here is your drink.</p>'
 
 
+@app.route("/error")
+def error():
+    raise RuntimeError
+
+
 if __name__ == '__main__':
     app.run(threaded=True, debug=True)
