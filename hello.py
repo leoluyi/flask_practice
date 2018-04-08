@@ -9,6 +9,8 @@ statistic_data = {}
 
 @app.route('/')
 def index():
+    '''Get request information'''
+
     # Get headers
     user_agent = request.headers.get('User-Agent')
     # Get arguments
@@ -38,11 +40,19 @@ def has_cookie():
 
 @app.before_request
 def statistic():
+    '''Request hooks
+    
+    - `before_first_request`: Register a function to run before the first request is handled.
+    - `before_request`: Register a function to run before each request.
+    - `after_request`: Register a function to run after each request, if no unhandled exceptions occurred.
+    - `teardown_request`: Register a function to run after each request, even if unhandled exceptions occurred.
+    '''
+
     if request.path in [url_for('buy_food'), url_for('buy_drink')]:
         statistic_data[request.path] = statistic_data.setdefault(request.path, 0) + 1
 
 
-@app.route('/statistic') 
+@app.route('/statistic')
 def get_statistic():
     return 'statistic_data: {}'.format(statistic_data)
 
