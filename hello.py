@@ -19,6 +19,15 @@ def index():
     return '<p>Your browser is {}</p><p>Your name is {}</p>'.format(user_agent, user_name)
 
 
+@app.route("/users")
+def get_users():
+    users = ["Maomao", "Alicia"]
+    resp = ["<p>{}</p>".format(user) for user in users]
+    resp = "\n".join(resp)
+
+    return resp
+
+
 @app.route('/redirect')
 def redirect():
     return '<h1>Redirect</h1>', 302, {'Location': 'http://www.google.com'}
@@ -73,4 +82,4 @@ def error():
 
 
 if __name__ == '__main__':
-    app.run(threaded=True, debug=True)
+    app.run(threaded=True, debug=True, port=5000)
