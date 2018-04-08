@@ -28,6 +28,26 @@ def get_users():
     return resp
 
 
+# Dynamic route
+@app.route("/user/<name>")
+def get_user_name(name):
+    return "<h1>Hello, {}!</h1>".format(name)
+
+
+# Dynamic route
+@app.route("/user/<int:uid>")
+def get_user_id(uid):
+    if isinstance(uid, int):
+        return "<h1>Your ID: {}</h1>".format(uid)
+    return "<h1>ID should be int</h1>"
+
+
+# Dynamic route
+@app.route("/user/<path:path>")
+def get_user_path(path):
+    return "<h1>Path: {}</h1>".format(path)
+
+
 @app.route('/redirect')
 def redirect():
     return '<h1>Redirect</h1>', 302, {'Location': 'http://www.google.com'}
