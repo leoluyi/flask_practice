@@ -86,13 +86,14 @@ def redirect_google():
 
 @app.route('/has_cookie')
 def has_cookie():
-    data = '<h1>This document carries a cookie!</h1>'
+    data = '<h1>This document carries a cookie!</h1>', 200, {'Set-Cookie': 'answer=45'}
 
     # Set cookie: method 1
     # headers = {}
     # headers['Set-Cookie'] = 'answer=45'
+    # return Response(data, headers=headers)
 
-    # Set cookie: method 2
+    # Set cookie : method 2 - from response object
     res = app.make_response(data)
     res.set_cookie('answer', '1234', expires=1516717980)
     return res
