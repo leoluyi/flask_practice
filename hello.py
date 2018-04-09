@@ -79,8 +79,9 @@ def check_user(uid):
 
 
 @app.route('/redirect')
-def redirect():
-    return '<h1>Redirect</h1>', 302, {'Location': 'http://www.google.com'}
+def redirect_google():
+    # return '<h1>Redirect</h1>', 302, {'Location': 'http://www.google.com'}
+    return redirect("http://www.google.com")
 
 
 @app.route('/has_cookie')
