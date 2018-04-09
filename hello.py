@@ -131,6 +131,7 @@ def buy_drink():
 
 @app.route("/error")
 def error():
+    '''Try debug mode.'''
     raise RuntimeError
 
 
