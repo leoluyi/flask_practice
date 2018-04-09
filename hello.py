@@ -1,10 +1,25 @@
 # hello.py
 
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, redirect, abort
 
 app = Flask(__name__)
 
 statistic_data = {}
+
+# -------------------------------------------------------
+
+
+def load_user(uid):
+    try:
+        uid = int(uid)
+        if uid == 1:
+            return "Maomao"
+        elif uid == 2:
+            return "Alicia"
+    except BaseException:
+        return
+
+# -------------------------------------------------------
 
 
 @app.route('/')
@@ -46,6 +61,21 @@ def get_user_id(uid):
 @app.route("/user/<path:path>")
 def get_user_path(path):
     return "<h1>Path: {}</h1>".format(path)
+
+
+@app.route("/check_user/<uid>")
+def check_user(uid):
+    user = load_user(uid)
+
+    if not user:
+        '''
+        Return specific HTTP status code
+            - client error: 4xx
+            - server error: 5xx
+        '''
+        abort(400) 
+    else:
+        return "<h1>Hello, {}!</h1>".format(user)
 
 
 @app.route('/redirect')
