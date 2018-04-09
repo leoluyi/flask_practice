@@ -100,8 +100,8 @@ def has_cookie():
 
 
 @app.before_request
-def statistic():
-    '''Request hooks
+def count():
+    '''Request hooks.
     
     - `before_first_request`: Register a function to run before the first request is handled.
     - `before_request`: Register a function to run before each request.
@@ -110,7 +110,8 @@ def statistic():
     '''
 
     if request.path in [url_for('buy_food'), url_for('buy_drink')]:
-        statistic_data[request.path] = statistic_data.setdefault(request.path, 0) + 1
+        item = request.path.rsplit('/', 1)[-1]
+        statistic_data[item] = statistic_data.setdefault(item, 0) + 1
 
 
 @app.route('/statistic')
